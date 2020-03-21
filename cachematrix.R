@@ -1,23 +1,23 @@
-## Put comments here that give an overall description of what your
-## functions
+## Caching the Inverse of a Matrix:
 
-## These pair of functions will cache the inverse of matrix
+## Below are a pair of functions that are used to create a special object that stores \n
+## a matrix and caches its inverse.
 
-## Write a short comment describing this function
 
-## makeCacheMatrix function creates a special "matrix" object that can cache its inverse
+
+## This function creates a special "matrix" object that can cache its inverse
 
 makeCacheMatrix <- function(x = matrix()) {
         inv <- NULL                        ##inizialised inv as NULL
         set <- function(y) {                
-                x <<- y                   ##value of matrix in parent environment
+                x <<- y                   
                 inv <<- NULL              ## rest inv to NULL, if there is a new matrix
         }
-        get <- function() x               ##returns value of the matrix argument
+        get <- function() x               
             
         setInverse <- function(inverse) inv <<-inverse  ##assigns value of the inv in parent env
                 
-        getInverse<- function() inv       ##gets the value of inv where called
+        getInverse<- function() inv       
         
         list(set = set, get = get,
              setInverse = setInverse,
@@ -38,8 +38,9 @@ cacheSolve <- function(x, ...) {
                 message("getting cached data")
                 return(inv)
         }
-        data <- x$get()
-        inv <- solve(data, ...)
+        mat <- x$get()
+        inv <- solve(mat, ...)
         x$setInverse(inv)
+        inv
         
 }
